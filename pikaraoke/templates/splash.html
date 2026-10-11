@@ -30,6 +30,16 @@
 </script>
 <script src="{{ url_for('static', filename='js/splash.js') }}"></script>
 {% endblock %} {% block body %}
+<div style="
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 100vw;
+    height: 100vh;
+    transform: translate(-50%, -50%) scale(0.95);
+    transform-origin: center center;
+    overflow: hidden;
+">
 <div id="top-container" class="overlay">
 <i class="icon icon-mic-1 is-invisible" style="position: absolute" title="Current singer"></i>
   <div
@@ -383,5 +393,6 @@
     max-width: 450px;
   }
 </style>
+</div>
 
 {% endblock %}
