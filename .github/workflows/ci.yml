@@ -100,6 +100,25 @@ jobs:
     - name: Run tests
       run: uv run pytest tests/ -v --cov=pikaraoke --cov-report=term-missing --cov-report=xml:coverage.xml
 
+  # Sibling of the Python unit tests: a Node toolchain failure does not
+  # mask a green Python suite, and the two run in parallel.
+  js-unit-tests:
+    runs-on: ubuntu-latest
+    name: JS Unit Tests
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v7
+
+    - name: Set up Node
+      # The suite runs under the node runtime pinned in package.json; this
+      # npm is only the bootstrap that installs it and the locked toolchain.
+      uses: actions/setup-node@v4
+      with:
+        node-version: '22'
+
+    - name: Run JS tests
+      run: scripts/run_js_tests.sh
+
   docker-smoketest:
     runs-on: ubuntu-latest
     name: Docker Build Smoketest (amd64)
